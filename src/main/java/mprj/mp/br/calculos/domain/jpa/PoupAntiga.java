@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "tbl_poupanca_antiga")
-public class PP01  {
+public class PoupAntiga {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

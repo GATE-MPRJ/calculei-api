@@ -1,8 +1,7 @@
 package mprj.mp.br.calculos.controller;
 
 
-import mprj.mp.br.calculos.domain.jpa.PP01;
-import mprj.mp.br.calculos.repository.Poup01Repository;
+import mprj.mp.br.calculos.domain.jpa.PoupAntiga;
 import mprj.mp.br.calculos.repository.PoupNovaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,7 +22,7 @@ public class PoupNovaController {
     private PoupNovaRepository poupNovaRpository;
 
     @GetMapping("/allPp01")
-    public List<PP01> findAllByOrderByIdAsc(){
+    public List<PoupAntiga> findAllByOrderByIdAsc(){
         return poupNovaRpository.findAllByOrderByIdAsc();
     }
 
@@ -32,7 +31,7 @@ public class PoupNovaController {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
         Date ed = formato.parse(endDate);
-        List<PP01> lista =   poupNovaRpository.findByJoinedDateBetweenNative(st,ed);
+        List<PoupAntiga> lista =   poupNovaRpository.findByJoinedDateBetweenNative(st,ed);
         return new HttpEntity<>(lista); // RETORNA OBJETO JSON PAGINADO
 
     }
