@@ -21,12 +21,12 @@ public class PoupAntigaController {
     @Autowired
     private PoupAntigaRepository poupAntigaRepository;
 
-    @GetMapping("/allPp01")
+    @GetMapping("/allPoupA")
     public List<PoupAntiga> findAllByOrderByIdAsc(){
         return poupAntigaRepository.findAllByOrderByIdAsc();
     }
 
-    @GetMapping("/PpAfindDates")
+    @GetMapping("/PoupAfindDates")
     public HttpEntity findDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
