@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "tbl_cdi")
 public class CDI {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "Nome")

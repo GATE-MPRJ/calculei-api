@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.repository;
 
 
+import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.domain.jpa.SELIC;
 import mprj.mp.br.calculos.domain.jpa.TR;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,11 +24,12 @@ public interface TrRepository extends JpaRepository<TR, Long> {
     List<TR> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
-    /* @DateTimeFormat(iso = ISO.DATE
-    List<IGPM> getAllBetweenDates(@Param("startDate") java.sql.Date startDate , @Param("endDate") java.sql.Date endDate);
-             @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("endDate")Date endDate);
+    @Query(value = "SELECT * from tbl_tr e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    List<TR> findBetween(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
+                           @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
-             */
+    @Query(value = "SELECT * from tbl_tr e where e.data = :startDate", nativeQuery = true)
+    List<TR> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
 
     @Query(value = "SELECT * from tbl_tr e where e.valor > :valor", nativeQuery = true)

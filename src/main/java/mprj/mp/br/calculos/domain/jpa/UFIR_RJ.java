@@ -9,7 +9,7 @@ import java.util.Date;
 @Table(name = "tbl_ufir_rj")
 public class UFIR_RJ {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "Nome")

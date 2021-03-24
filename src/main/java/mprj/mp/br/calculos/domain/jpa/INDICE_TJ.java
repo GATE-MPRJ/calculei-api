@@ -9,7 +9,7 @@ import java.util.Date;
 @Table(name = "tbl_fator_correcao_tjrj")
 public class INDICE_TJ {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "Nome")

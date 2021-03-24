@@ -1,5 +1,6 @@
 package mprj.mp.br.calculos.repository;
 
+import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.domain.jpa.IPCAE;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +21,8 @@ public interface ipcaeRepository extends JpaRepository<IPCAE, Long> {
     List<IPCAE> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
+    @Query(value = "SELECT * from tbl_ipcae e where e.data = :startDate", nativeQuery = true)
+    List<IPCAE> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
     @Query(value = "SELECT * from tbl_ipcae e where e.valor > :valor", nativeQuery = true)
     List<IPCAE> findByValorNative(@Param("valor") double valor);

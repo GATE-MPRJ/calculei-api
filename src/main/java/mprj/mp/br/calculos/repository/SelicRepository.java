@@ -23,11 +23,8 @@ public interface SelicRepository extends JpaRepository<SELIC, Long> {
     List<SELIC> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
-    /* @DateTimeFormat(iso = ISO.DATE
-    List<IGPM> getAllBetweenDates(@Param("startDate") java.sql.Date startDate , @Param("endDate") java.sql.Date endDate);
-             @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("endDate")Date endDate);
-
-             */
+    @Query(value = "SELECT * from tbl_selic e where e.data = :startDate", nativeQuery = true)
+    List<SELIC> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
 
     @Query(value = "SELECT * from tbl_selic e where e.valor > :valor", nativeQuery = true)

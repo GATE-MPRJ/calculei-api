@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.repository;
 
 import mprj.mp.br.calculos.domain.jpa.PoupAntiga;
+import mprj.mp.br.calculos.domain.jpa.PoupNova;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,24 +11,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "PouoNova", path = "poupNpva")
+@RepositoryRestResource(collectionResourceRel = "PoupNova", path = "poupNova")
 //@Repository
-public interface PoupNovaRepository extends JpaRepository<PoupAntiga, Long> {
+public interface PoupNovaRepository extends JpaRepository<PoupNova, Long> {
 
-    List<PoupAntiga> findByValor(@Param("valor") double valor);
+    List<PoupNova> findByValor(@Param("valor") double valor);
 
-    @Query(value = "SELECT * from tbl_pp01 e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
-    List<PoupAntiga> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
+    @Query(value = "SELECT * from tbl_poupanca_nova e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    List<PoupNova> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                                    @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
-    @Query(value = "SELECT * from tbl_pp01 e where e.valor > :valor", nativeQuery = true)
-    List<PoupAntiga> findByValorNative(@Param("valor") double valor);
+
+    @Query(value = "SELECT * from tbl_poupanca_nova e where e.data = :startDate", nativeQuery = true)
+    List<PoupNova> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
+
+
+    @Query(value = "SELECT * from tbl_poupanca_nova e where e.valor > :valor", nativeQuery = true)
+    List<PoupNova> findByValorNative(@Param("valor") double valor);
 
 
     //@Query("select id from IGPM e where e.data BETWEEN :startDate AND :endDate")
     //List<IGPM> findByStartDateBetween(@DateTimeFormat(pattern = "yyyy-mm-dd")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("endDate")Date endDate);
 
-    List<PoupAntiga> findAllByOrderByIdAsc();
+    List<PoupNova> findAllByOrderByIdAsc();
 
 
 

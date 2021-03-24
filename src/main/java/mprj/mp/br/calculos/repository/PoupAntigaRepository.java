@@ -1,5 +1,6 @@
 package mprj.mp.br.calculos.repository;
 
+import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.domain.jpa.PoupAntiga;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,10 @@ public interface PoupAntigaRepository extends JpaRepository<PoupAntiga, Long> {
     @Query(value = "SELECT * from tbl_pp01 e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
     List<PoupAntiga> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                                    @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
+
+    @Query(value = "SELECT * from tbl_pp01 e where e.data = :startDate", nativeQuery = true)
+    List<PoupAntiga> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
+
     @Query(value = "SELECT * from tbl_pp01 e where e.valor > :valor", nativeQuery = true)
     List<PoupAntiga> findByValorNative(@Param("valor") double valor);
 

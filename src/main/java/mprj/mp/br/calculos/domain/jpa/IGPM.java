@@ -15,11 +15,12 @@ import java.util.List;
 @Entity
 @Table(name = "tbl_igpm")
 public class IGPM {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
-    @Column(name = "Nome")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private long id = -1;
+
+    @Column(name = "nome")
     private String Nome;
 
     @Column(name = "fator")
@@ -27,9 +28,15 @@ public class IGPM {
 
     @Column(name = "valor")
     private double valor;
+
     @Column(name = "data")
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date data;
+    /*
+    @Column(name = "acumulado")
+    private Double acumulado;
+
+     */
 
     public long getId(){return id;}
     public double getValor(){ return  valor;}
@@ -40,7 +47,12 @@ public class IGPM {
     public void setFator(double fator) { this.fator = fator;}
     public String getNome() { return Nome;}
     public void setNome(String Nome){this.Nome = Nome;}
+    /*
+    public void setAcumulado(Double acumulado){
+        return acumulado;
+    }
 
+     */
     @Override
     public String toString() {
         return "Tutorial [id=" + id + ", nome=" + Nome + ", fator=" + fator + ", valor = "  + valor + ", data=" +data+ "]";

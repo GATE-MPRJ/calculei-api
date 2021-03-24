@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.repository;
 
 
+import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.domain.jpa.INDICE_TJ_FAZ;
 import mprj.mp.br.calculos.domain.jpa.TR;
 import mprj.mp.br.calculos.domain.jpa.UFIR_RJ;
@@ -23,6 +24,9 @@ public interface IndicesTjFazRepository extends JpaRepository<INDICE_TJ_FAZ, Lon
 
     List<INDICE_TJ_FAZ> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
+
+    @Query(value = "SELECT * from tbl_fator_correcao_faz_tjrj e where e.data = :startDate", nativeQuery = true)
+    List<INDICE_TJ_FAZ> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
     @Query(value = "SELECT * from tbl_fator_correcao_faz_tjrj e where e.valor > :valor", nativeQuery = true)
     List<INDICE_TJ_FAZ> findByValorNative(@Param("valor") double valor);
