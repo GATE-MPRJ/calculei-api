@@ -1,7 +1,7 @@
 package mprj.mp.br.calculos.repository;
 
 import mprj.mp.br.calculos.domain.jpa.CDI;
-import mprj.mp.br.calculos.domain.jpa.IGPM;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
