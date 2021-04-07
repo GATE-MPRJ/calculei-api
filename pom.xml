@@ -11,7 +11,13 @@
 
 	<groupId>mprj.mp.br</groupId>
 	<artifactId>calculos</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	<!--
+	<artifactId>gate-backend</artifactId>
+    <version>1.8</version>
+    <packaging>jar</packaging>
+	-->
 	<name>calculos</name>
 	<description>Calculadora Judicial</description>
 
