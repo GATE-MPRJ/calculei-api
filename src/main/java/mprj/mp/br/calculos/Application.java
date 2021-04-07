@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class Application {
 
 	public static void main(String[] args) {
-		System.setProperty("server.servlet.context-path", "/calc");
+		// System.setProperty("server.servlet.context-path", "/calc");
 		// System.setProperty("server.server.servlet-path", "/api");
 		SpringApplication.run(Application.class, args);
 	}
