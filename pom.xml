@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>mprj.mp.br</groupId>
-	<artifactId>calculos</artifactId>
+	<artifactId>calculo-backend</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 	<!--
