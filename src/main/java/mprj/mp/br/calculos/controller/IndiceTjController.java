@@ -17,10 +17,8 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/TJ")
-
+@RequestMapping("/TJ899")
 public class IndiceTjController {
-
     @Autowired
     private IndicesTjRepository indicesTjRepository;
 

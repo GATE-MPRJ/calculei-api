@@ -15,6 +15,7 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "UFIR_RJ", path = "ufir_rj")
 //@Repository
+
 public interface UfirRjRepository extends CrudRepository<UFIR_RJ, Long> {
 
     List<TR> findByValor(@Param("valor") double valor);

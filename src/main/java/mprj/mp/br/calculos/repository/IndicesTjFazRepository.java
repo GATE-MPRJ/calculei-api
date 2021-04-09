@@ -21,7 +21,6 @@ public interface IndicesTjFazRepository extends JpaRepository<INDICE_TJ_FAZ, Lon
     List<TR> findByValor(@Param("valor") double valor);
 
     @Query(value = "SELECT * from tbl_fator_correcao_faz_tjrj e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
-
     List<INDICE_TJ_FAZ> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
