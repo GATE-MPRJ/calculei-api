@@ -17,16 +17,21 @@ public class INDICE_TJ_FAZ {
 
     @Column(name = "fator")
     private double fator;
-
+    /*
     @Column(name = "valor")
     private double valor;
+
+    */
     @Column(name = "data")
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date data;
 
     public long getId(){return id;}
+    /*
     public double getValor(){ return  valor;}
     public void setValor(double valor){ this.valor = valor;}
+
+     */
     public Date getData() {return data;}
     public void  setData(Date data){ this.data = data;}
     public double getFator(){return fator;}
@@ -36,6 +41,6 @@ public class INDICE_TJ_FAZ {
 
     @Override
     public String toString() {
-        return "Tutorial [id=" + id + ", nome=" + Nome + ", fator=" + fator + ", valor = "  + valor + ", data=" + data + "]";
+        return "[id=" + id + ", nome=" + Nome + ", fator=" + fator + ",  data=" + data + "]";
     }
 }

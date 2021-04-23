@@ -1,8 +1,9 @@
 package mprj.mp.br.calculos.controller;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import mprj.mp.br.calculos.domain.jpa.CDI;
-import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.repository.cdiRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,17 +21,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/CDI")
+@Api(value = "CDI")
 public class cdiController {
 
     @Autowired
     private cdiRepository cdiRepository;
 
+    @ApiOperation(value = "Lista CDI " )
     @GetMapping("/allCdi")
     public List<CDI> findAllByOrderByIdAsc(){
         return
                 cdiRepository.findAllByOrderByIdAsc();
     }
 
+    @ApiOperation(value = "Retorna CDI entre datas" )
     @GetMapping(value = "BetweenDates")
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
