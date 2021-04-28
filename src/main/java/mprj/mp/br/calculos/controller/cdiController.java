@@ -21,20 +21,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/CDI")
-@Api(value = "CDI")
+@Api(value = "Controller do CDI" )
 public class cdiController {
 
     @Autowired
     private cdiRepository cdiRepository;
 
-    @ApiOperation(value = "Lista CDI " )
+    @ApiOperation(value = "LISTA TODOS DADOS DE CDI DO DB" )
     @GetMapping("/allCdi")
     public List<CDI> findAllByOrderByIdAsc(){
         return
                 cdiRepository.findAllByOrderByIdAsc();
     }
 
-    @ApiOperation(value = "Retorna CDI entre datas" )
+    @ApiOperation(value = "RETORNA JSON DE CDI ENTRE DATAS" )
     @GetMapping(value = "BetweenDates")
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
