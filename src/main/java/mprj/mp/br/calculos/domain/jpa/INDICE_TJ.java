@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_fator_correcao_tjrj")
+@Table(name = "tbl_tbl_ufir_rj")
 public class INDICE_TJ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
