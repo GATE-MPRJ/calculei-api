@@ -1,22 +1,18 @@
 package mprj.mp.br.calculos.controller;
 
 
-import mprj.mp.br.calculos.repository.IgpmRepository;
 import mprj.mp.br.calculos.domain.jpa.IGPM;
+import mprj.mp.br.calculos.repository.IgpmRepository;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 
 //@CrossOrigin(origins = "http://localhost:8080")
@@ -45,14 +41,15 @@ public class IgpmController {
         List<IGPM> lista =   igpmRepository.findByJoinedDateBetweenNative(st,ed);
 
         // Abaixo é igual em todos o controllers
-        double Valor3 = 0.0 ;
+        float Valor3 = 0 ;
+        float Valor4=  0;
         double valorJuros = 0.0;
         JSONArray jsonArray = new JSONArray();
         JSONObject obj1 = new JSONObject();
         for(int i = 0 ; i < lista.size(); i++){
             JSONObject obj = new JSONObject();
             if(i <= 0){
-                Valor3 = lista.get(i).getFator();
+                Valor3 = lista.get(i).getFator() * 1;
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
