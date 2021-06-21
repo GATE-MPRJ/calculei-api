@@ -39,20 +39,19 @@ public class IndiceTjController {
         JSONObject obj1 = new JSONObject();
         for(int i = 0 ; i < lista.size(); i++){
             JSONObject obj = new JSONObject();
-            /*
+
             if(i <= 0){
                 Valor3 = lista.get(i).getFator();
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
 
-             */
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());
             // obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            // obj.put("acumulado", Valor3);
+            obj.put("acumulado", Valor3);
             jsonArray.put(obj);
             System.out.println(obj);
         }
