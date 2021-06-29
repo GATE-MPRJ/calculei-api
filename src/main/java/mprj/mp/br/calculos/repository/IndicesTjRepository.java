@@ -24,9 +24,11 @@ public interface IndicesTjRepository extends JpaRepository<INDICE_TJ, Long> {
     @Query(value = "SELECT * from tbl_ufir_rj e where e.data = :startDate", nativeQuery = true)
     List<INDICE_TJ> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
-
+    /*
     @Query("select id from tbl_ufir_rj e where e.data BETWEEN :startDate AND :endDate")
     List<INDICE_TJ> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
+
+     */
 
     List<INDICE_TJ> findAllByOrderByIdAsc();
 
