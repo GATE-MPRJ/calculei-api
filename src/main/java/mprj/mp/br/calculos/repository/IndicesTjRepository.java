@@ -17,15 +17,15 @@ public interface IndicesTjRepository extends JpaRepository<INDICE_TJ, Long> {
 
     //List<TR> findByValor(@Param("valor") double valor);
 
-    @Query(value = "SELECT * from tbl_fator_correcao_tjrj e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_ufir_rj e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
     List<INDICE_TJ> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
-    @Query(value = "SELECT * from tbl_fator_correcao_tjrj e where e.data = :startDate", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_ufir_rj e where e.data = :startDate", nativeQuery = true)
     List<INDICE_TJ> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
 
-    @Query("select id from INDICE_TJ e where e.data BETWEEN :startDate AND :endDate")
+    @Query("select id from tbl_ufir_rj e where e.data BETWEEN :startDate AND :endDate")
     List<INDICE_TJ> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
 
     List<INDICE_TJ> findAllByOrderByIdAsc();

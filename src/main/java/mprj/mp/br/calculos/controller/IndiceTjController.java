@@ -31,7 +31,6 @@ public class IndiceTjController {
         Date st = formato.parse(startDate);
         Date ed = formato.parse(endDate);
         List<INDICE_TJ> lista =   indicesTjRepository.findByJoinedDateBetweenNative(st,ed);
-
         // Abaixo é igual em todos o controllers
         double Valor3 = 0.0 ;
         double valorJuros = 0.0;
