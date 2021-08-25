@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.controller;
 
 
+import io.swagger.annotations.ApiOperation;
 import mprj.mp.br.calculos.domain.jpa.INDICE_TJ;
 import mprj.mp.br.calculos.repository.IndicesTjRepository;
 import org.json.JSONArray;
@@ -24,7 +25,7 @@ public class IndiceTjController {
     public List<INDICE_TJ> findAllByOrderByIdAsc(){
         return indicesTjRepository.findAllByOrderByIdAsc();
     }
-
+    @ApiOperation(value = "RETORNA JSON DE TJ899 ENTRE DATAS" )
     @RequestMapping(value = "BetweenDates", method = RequestMethod.GET)
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -63,11 +64,5 @@ public class IndiceTjController {
 
 
     }
-
-
-
-
-
-
 
 }

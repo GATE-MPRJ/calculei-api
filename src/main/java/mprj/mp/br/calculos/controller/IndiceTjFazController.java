@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.controller;
 
 
+import io.swagger.annotations.ApiOperation;
 import mprj.mp.br.calculos.domain.jpa.INDICE_TJ_FAZ;
 import mprj.mp.br.calculos.repository.IndicesTjFazRepository;
 import org.json.JSONArray;
@@ -36,6 +37,7 @@ public class IndiceTjFazController {
         return new HttpEntity<>(lista); // RETORNA OBJETO JSON PAGINADO
 
     }
+    @ApiOperation(value = "RETORNA JSON DE TJ11960 ENTRE DATAS" )
     @RequestMapping(value = "BetweenDates", method = RequestMethod.GET)
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");

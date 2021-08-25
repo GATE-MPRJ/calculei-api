@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.controller;
 
 
+import io.swagger.annotations.ApiOperation;
 import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.repository.IgpmRepository;
 import org.json.JSONArray;
@@ -24,7 +25,7 @@ public class IgpmController {
     @Autowired
     private IgpmRepository igpmRepository;
 
-    //@GetMapping("/allIgmp")
+    @ApiOperation(value = "RETORNA JSON DE TODOS OS IGP-M" )
     @RequestMapping(value = "allIgmp", method = RequestMethod.GET)
     public List<IGPM> findAllByOrderByIdAsc(){
         return igpmRepository.findAllByOrderByIdAsc();
@@ -32,6 +33,8 @@ public class IgpmController {
 
     //BETWEEN
 
+
+    @ApiOperation(value = "RETORNA JSON DE IGP-M ENTRE DATAS" )
     @RequestMapping(value = "BetweenDates", method = RequestMethod.GET)
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -70,7 +73,7 @@ public class IgpmController {
 
 
     }
-
+/*
     @RequestMapping(value = "BetweenDates2", method = RequestMethod.GET)
     public HttpEntity BetweenDates2(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -103,7 +106,7 @@ public class IgpmController {
         //return new ResponseEntity<IGPM>(entities, HttpStatus.OK); // RETORNA OBJETO JSON PAGINADO
 
     }
-
+*/
     @GetMapping("/alligpmJson")
     public HttpEntity alligpmJson() throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
