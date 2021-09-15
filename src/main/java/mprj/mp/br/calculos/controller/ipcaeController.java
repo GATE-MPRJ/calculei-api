@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @RestController
 @RequestMapping("/IPCA-E")
@@ -34,6 +36,19 @@ public class ipcaeController {
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        calendar.setTime(st);
+        System.out.println(calendar.get(Calendar.YEAR));
+        System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+        System.out.println(new SimpleDateFormat("MM").format(calendar.getTime()));
+        int stday = calendar.get(Calendar.DAY_OF_MONTH);
+        String stMonth = new SimpleDateFormat("MM").format(calendar.getTime());;
+        int stYear = calendar.get(Calendar.YEAR);
+        if(calendar.get(Calendar.DAY_OF_MONTH) <= 31){
+
+            st = formato.parse("01"+"-"+ stMonth +"-"+ stYear);
+        }
+
         Date ed = formato.parse(endDate);
 
         List<IPCAE> lista =   ipcaeRepository.findByJoinedDateBetweenNative(st,ed); // Lista entre datas passada por paramentro
