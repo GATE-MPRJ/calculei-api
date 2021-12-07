@@ -17,14 +17,19 @@ public interface PoupAntigaRepository extends JpaRepository<PoupAntiga, Long> {
 
     List<PoupAntiga> findByValor(@Param("valor") double valor);
 
-    @Query(value = "SELECT * from tbl_pp01 e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_poupanca_antiga e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
     List<PoupAntiga> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                                    @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
+    /*
+    @Query(value = "SELECT * from tbl_cdi e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    List<CDI> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
+                                             @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
+     */
 
-    @Query(value = "SELECT * from tbl_pp01 e where e.data = :startDate", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_poupanca_antiga e where e.data = :startDate", nativeQuery = true)
     List<PoupAntiga> findByDate(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate);
 
-    @Query(value = "SELECT * from tbl_pp01 e where e.valor > :valor", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_poupanca_antiga e where e.valor > :valor", nativeQuery = true)
     List<PoupAntiga> findByValorNative(@Param("valor") double valor);
 
 

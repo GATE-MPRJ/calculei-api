@@ -47,6 +47,7 @@ public class PoupNovaController {
         Date ed = formato.parse(endDate);
         List<PoupNova> lista =   poupNovaRpository.findByJoinedDateBetweenNative(st,ed);
 
+        Date inicio = formato.parse("03-05-2012");
         // Abaixo é igual em todos o controllers
         double Valor3 = 0.0 ;
         double valorJuros = 0.0;
@@ -61,6 +62,7 @@ public class PoupNovaController {
             }
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
+
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());

@@ -17,7 +17,7 @@ public interface PoupNovaRepository extends JpaRepository<PoupNova, Long> {
 
     List<PoupNova> findByValor(@Param("valor") double valor);
 
-    @Query(value = "SELECT * from tbl_poupanca_nova e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    @Query(value = "SELECT * from tbl_poupanca_nova e where e.data BETWEEN :startDate and :endDate and e.valor notnull order by e.data", nativeQuery = true)
     List<PoupNova> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                                    @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 

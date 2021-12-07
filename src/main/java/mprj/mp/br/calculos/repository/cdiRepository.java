@@ -18,7 +18,6 @@ public interface cdiRepository extends JpaRepository<CDI, Long> {
     List<CDI> findByValor(@Param("valor") double valor);
 
     @Query(value = "SELECT * from tbl_cdi e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
-
     List<CDI> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
