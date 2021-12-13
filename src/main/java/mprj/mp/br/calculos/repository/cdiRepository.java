@@ -2,6 +2,7 @@ package mprj.mp.br.calculos.repository;
 
 import mprj.mp.br.calculos.domain.jpa.CDI;
 
+import mprj.mp.br.calculos.domain.jpa.IGPM;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,12 +31,13 @@ public interface cdiRepository extends JpaRepository<CDI, Long> {
     List<CDI> findByValorNative(@Param("valor") double valor);
 
 
-    @Query("select id from IGPM e where e.data BETWEEN :startDate AND :endDate")
+/*    @Query("select id from tbl_cdi e where e.data BETWEEN :startDate AND :endDate")
     List<CDI> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
-
+*/
     List<CDI> findAllByOrderByIdAsc();
 
-
+    @Query(value = "SELECT * from tbl_cdi e where e.data =(select distinct (max(data)) from tbl_cdi)", nativeQuery = true)
+    List<CDI> findByLastUpdate();
 
 
 

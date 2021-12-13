@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,11 +47,16 @@ public class PoupNovaController {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
         Date ed = formato.parse(endDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(ed);
+        c.add(Calendar.MONTH, -1);
+        Date d = c.getTime();
+        ed = d;
         List<PoupNova> lista =   poupNovaRpository.findByJoinedDateBetweenNative(st,ed);
-
         Date inicio = formato.parse("03-05-2012");
+
         // Abaixo é igual em todos o controllers
-        double Valor3 = 0.0 ;
+        double Valor3 = 0 ;
         double valorJuros = 0.0;
         JSONArray jsonArray = new JSONArray();
         JSONObject obj1 = new JSONObject();
@@ -60,6 +67,7 @@ public class PoupNovaController {
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
+            DecimalFormat decimalFormat = new DecimalFormat("#");
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
 
@@ -67,6 +75,7 @@ public class PoupNovaController {
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
             obj.put("acumulado", Valor3);
+            //obj.put("acumulado",  Float.parseFloat(decimalFormat.format(Valor3)));
             jsonArray.put(obj);
             System.out.println(obj);
         }

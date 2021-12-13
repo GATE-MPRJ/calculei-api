@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +37,15 @@ public class PoupAntigaController {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
         Date ed = formato.parse(endDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(ed);
+        c.add(Calendar.MONTH, -1);
+
+        Date d = c.getTime();
+        ed = d;
+        //String res = format.format(d);
+        //new DateTime(referenceDate).minusMonths(3).toDate();
+
         List<PoupAntiga> lista =   poupAntigaRepository.findByJoinedDateBetweenNative(st,ed);
         return new HttpEntity<>(lista); // RETORNA OBJETO JSON PAGINADO
 
@@ -44,6 +55,12 @@ public class PoupAntigaController {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
         Date ed = formato.parse(endDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(ed);
+        c.add(Calendar.MONTH, -1);
+        Date d = c.getTime();
+        ed = d;
+
         List<PoupAntiga> lista =   poupAntigaRepository.findByJoinedDateBetweenNative(st,ed);
 
         // Abaixo é igual em todos o controllers
@@ -58,12 +75,16 @@ public class PoupAntigaController {
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
+            float f = (float) Valor3;
+
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00#");
+            //Float.parseFloat(decimalFormat.format(d))
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            obj.put("acumulado", Valor3);
+            obj.put("acumulado",  Valor3);
             jsonArray.put(obj);
             System.out.println(obj);
         }

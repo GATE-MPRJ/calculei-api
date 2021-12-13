@@ -30,8 +30,8 @@ public interface PoupNovaRepository extends JpaRepository<PoupNova, Long> {
     List<PoupNova> findByValorNative(@Param("valor") double valor);
 
 
-    //@Query("select id from IGPM e where e.data BETWEEN :startDate AND :endDate")
-    //List<IGPM> findByStartDateBetween(@DateTimeFormat(pattern = "yyyy-mm-dd")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("endDate")Date endDate);
+    @Query(value = "SELECT * from tbl_poupanca_nova e where e.data =(select distinct (max(data)) from tbl_poupanca_nova)", nativeQuery = true)
+    List<PoupNova> findByLastUpdate();
 
     List<PoupNova> findAllByOrderByIdAsc();
 

@@ -1,6 +1,7 @@
 package mprj.mp.br.calculos.repository;
 
 
+import mprj.mp.br.calculos.domain.jpa.IPCAE;
 import mprj.mp.br.calculos.domain.jpa.PoupNova;
 import mprj.mp.br.calculos.domain.jpa.SALARIO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,8 +30,10 @@ public interface SalarioRepository extends JpaRepository<SALARIO, Long> {
     List<SALARIO> findByValorNative(@Param("valor") double valor);
 
 
-    @Query("select id from SALARIO e where e.data BETWEEN :startDate AND :endDate")
-    List<SALARIO> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
+
+    @Query(value = "SELECT * from tbl_salario e where e.data =(select distinct (max(data)) from tbl_salario)", nativeQuery = true)
+    List<SALARIO> findByLastUpdate();
+
 
     List<SALARIO> findAllByOrderByIdAsc();
 

@@ -2,6 +2,7 @@ package mprj.mp.br.calculos.repository;
 
 import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.domain.jpa.PoupAntiga;
+import mprj.mp.br.calculos.domain.jpa.PoupNova;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +21,10 @@ public interface PoupAntigaRepository extends JpaRepository<PoupAntiga, Long> {
     @Query(value = "SELECT * from tbl_poupanca_antiga e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
     List<PoupAntiga> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                                    @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
+
+    @Query(value = "SELECT *, sum(fator) over (order by data) where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
+    List<PoupAntiga> findByJoinedDateBetweenNativeSum(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
+                                                   @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
     /*
     @Query(value = "SELECT * from tbl_cdi e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
     List<CDI> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
@@ -31,6 +36,9 @@ public interface PoupAntigaRepository extends JpaRepository<PoupAntiga, Long> {
 
     @Query(value = "SELECT * from tbl_poupanca_antiga e where e.valor > :valor", nativeQuery = true)
     List<PoupAntiga> findByValorNative(@Param("valor") double valor);
+
+    @Query(value = "SELECT * from tbl_poupanca_antiga e where e.data =(select distinct (max(data)) from tbl_poupanca_antiga)", nativeQuery = true)
+    List<PoupAntiga> findByLastUpdate();
 
 
     //@Query("select id from IGPM e where e.data BETWEEN :startDate AND :endDate")

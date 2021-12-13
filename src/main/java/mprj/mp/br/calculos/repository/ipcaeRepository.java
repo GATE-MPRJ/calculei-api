@@ -1,5 +1,6 @@
 package mprj.mp.br.calculos.repository;
 
+import mprj.mp.br.calculos.domain.jpa.CDI;
 import mprj.mp.br.calculos.domain.jpa.IGPM;
 import mprj.mp.br.calculos.domain.jpa.IPCAE;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,8 +29,10 @@ public interface ipcaeRepository extends JpaRepository<IPCAE, Long> {
     List<IPCAE> findByValorNative(@Param("valor") double valor);
 
 
-    @Query("select id from IGPM e where e.data BETWEEN :startDate AND :endDate")
-    List<IPCAE> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
+
+    @Query(value = "SELECT * from tbl_ipcae e where e.data =(select distinct (max(data)) from tbl_ipcae)", nativeQuery = true)
+    List<IPCAE> findByLastUpdate();
+
 
     List<IPCAE> findAllByOrderByIdAsc();
 

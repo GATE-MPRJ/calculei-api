@@ -31,8 +31,11 @@ public interface SelicRepository extends JpaRepository<SELIC, Long> {
     List<SELIC> findByValorNative(@Param("valor") double valor);
 
 
-    @Query("select id from SELIC e where e.data BETWEEN :startDate AND :endDate")
-    List<SELIC> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
+
+
+    @Query(value = "SELECT * from tbl_selic e where e.data =(select distinct (max(data)) from tbl_selic)", nativeQuery = true)
+    List<SELIC> findByLastUpdate();
+
 
     List<SELIC> findAllByOrderByIdAsc();
 

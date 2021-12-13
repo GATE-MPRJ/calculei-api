@@ -36,9 +36,9 @@ public interface TrRepository extends JpaRepository<TR, Long> {
     List<TR> findByValorNative(@Param("valor") double valor);
 
 
-    @Query("select id from TR e where e.data BETWEEN :startDate AND :endDate")
-    List<TR> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
 
+    @Query(value = "SELECT * from tbl_tr e where e.data =(select distinct (max(data)) from tbl_tr)", nativeQuery = true)
+    List<TR> findByLastUpdate();
     List<TR> findAllByOrderByIdAsc();
 
 

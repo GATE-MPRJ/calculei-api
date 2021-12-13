@@ -2,6 +2,7 @@ package mprj.mp.br.calculos.repository;
 
 
 import mprj.mp.br.calculos.domain.jpa.INDICE_TJ;
+import mprj.mp.br.calculos.domain.jpa.TR;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,6 +30,8 @@ public interface IndicesTjRepository extends JpaRepository<INDICE_TJ, Long> {
     List<INDICE_TJ> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
 
      */
+    @Query(value = "SELECT * from tbl_ufir_rj e where e.data =(select distinct (max(data)) from tbl_ufir_rj)", nativeQuery = true)
+    List<INDICE_TJ> findByLastUpdate();
 
     List<INDICE_TJ> findAllByOrderByIdAsc();
 
