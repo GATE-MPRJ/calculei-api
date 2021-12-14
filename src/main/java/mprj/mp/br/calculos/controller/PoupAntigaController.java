@@ -78,13 +78,16 @@ public class PoupAntigaController {
             float f = (float) Valor3;
 
             DecimalFormat decimalFormat = new DecimalFormat("#,##0.00#");
+            decimalFormat.setMaximumFractionDigits(8);
+            //df.format(this.saldo);
+            //decimalFormat.format (Valor3 / 100);
             //Float.parseFloat(decimalFormat.format(d))
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            obj.put("acumulado",  Valor3);
+            obj.put("acumulado",  decimalFormat.format (Valor3 ));
             jsonArray.put(obj);
             System.out.println(obj);
         }

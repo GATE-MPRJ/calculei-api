@@ -67,14 +67,16 @@ public class PoupNovaController {
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
-            DecimalFormat decimalFormat = new DecimalFormat("#");
+            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00#");
+            decimalFormat.setMaximumFractionDigits(8);
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
 
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            obj.put("acumulado", Valor3);
+            //obj.put("acumulado", Valor3);
+            obj.put("acumulado",  decimalFormat.format (Valor3 ));
             //obj.put("acumulado",  Float.parseFloat(decimalFormat.format(Valor3)));
             jsonArray.put(obj);
             System.out.println(obj);

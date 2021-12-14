@@ -18,7 +18,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                //.host("h-calculei.mprj.mp.br")
+                .host("h-calculei.mprj.mp.br")
                 .select()
                 //.apis(RequestHandlerSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage("mprj.mp.br.calculos.controller"))
