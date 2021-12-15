@@ -21,7 +21,6 @@ public interface UfirRjRepository extends CrudRepository<UFIR_RJ, Long> {
     List<TR> findByValor(@Param("valor") double valor);
 
     @Query(value = "SELECT * from tbl_ufir_rj e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
-
     List<UFIR_RJ> findByJoinedDateBetweenNative(@Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date startDate,
                                              @Param("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "dd-MM-yyyy") Date endDate);
 
