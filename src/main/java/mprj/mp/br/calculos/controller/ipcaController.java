@@ -2,8 +2,9 @@ package mprj.mp.br.calculos.controller;
 
 
 import io.swagger.annotations.ApiOperation;
-import mprj.mp.br.calculos.domain.jpa.IGPM;
-import mprj.mp.br.calculos.repository.IgpmRepository;
+
+import mprj.mp.br.calculos.domain.jpa.IPCA;
+import mprj.mp.br.calculos.repository.ipcaRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,23 @@ import java.util.TimeZone;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/IGP-M")
-
-public class IgpmController {
+@RequestMapping("/IPCA")
+public class ipcaController {
 
     @Autowired
-    private IgpmRepository igpmRepository;
+    private ipcaRepository ipcaRepository;
+    //private IgpmRepository ipcaRepository;
 
     @ApiOperation(value = "RETORNA JSON DE TODOS OS IGP-M" )
-    @RequestMapping(value = "allIgmp", method = RequestMethod.GET)
-    public List<IGPM> findAllByOrderByIdAsc(){
-        return igpmRepository.findAllByOrderByIdAsc();
+    @RequestMapping(value = "allIPCA", method = RequestMethod.GET)
+    public List<IPCA> findAllByOrderByIdAsc(){
+        return ipcaRepository.findAllByOrderByIdAsc();
     }
 
     //BETWEEN
 
 
-    @ApiOperation(value = "RETORNA JSON DE IGP-M ENTRE DATAS" )
+    @ApiOperation(value = "RETORNA JSON DE IPCA ENTRE DATAS" )
     @RequestMapping(value = "BetweenDates", method = RequestMethod.GET)
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -58,7 +59,7 @@ public class IgpmController {
         Date ed = formato.parse(endDate);
         System.out.println(st);
         System.out.println(ed);
-        List<IGPM> lista =   igpmRepository.findByJoinedDateBetweenNative(st,ed);
+        List<IPCA> lista =   ipcaRepository.findByJoinedDateBetweenNative(st,ed);
 
         // Abaixo é igual em todos o controllers
         double Valor3 = 0 ;
@@ -92,11 +93,11 @@ public class IgpmController {
 
     }
 
-    @GetMapping("/alligpmJson")
+    @GetMapping("/allipcaJson")
     public HttpEntity alligpmJson() throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 
-        List<IGPM> lista =   igpmRepository.findAllByOrderByIdAsc();
+        List<IPCA> lista =   ipcaRepository.findAllByOrderByIdAsc();
         return new HttpEntity<>(lista); // RETORNA OBJETO JSON PAGINADO
 
     }

@@ -2,8 +2,8 @@ package mprj.mp.br.calculos.controller;
 
 
 import io.swagger.annotations.ApiOperation;
-import mprj.mp.br.calculos.domain.jpa.IGPM;
-import mprj.mp.br.calculos.repository.IgpmRepository;
+import mprj.mp.br.calculos.domain.jpa.IGPDI;
+import mprj.mp.br.calculos.repository.igpdiRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,22 @@ import java.util.TimeZone;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/IGP-M")
+@RequestMapping("/IGP-DI")
 
-public class IgpmController {
+public class igpdiController {
 
-    @Autowired
-    private IgpmRepository igpmRepository;
+    @Autowired    
+    private igpdiRepository igpdiRepository;
 
-    @ApiOperation(value = "RETORNA JSON DE TODOS OS IGP-M" )
-    @RequestMapping(value = "allIgmp", method = RequestMethod.GET)
-    public List<IGPM> findAllByOrderByIdAsc(){
-        return igpmRepository.findAllByOrderByIdAsc();
+    @ApiOperation(value = "RETORNA JSON DE TODOS OS IGP-DI" )
+    @RequestMapping(value = "allIpdi", method = RequestMethod.GET)
+    public List<IGPDI> findAllByOrderByIdAsc(){
+        return igpdiRepository.findAllByOrderByIdAsc();
     }
 
-    //BETWEEN
 
 
-    @ApiOperation(value = "RETORNA JSON DE IGP-M ENTRE DATAS" )
+    @ApiOperation(value = "RETORNA JSON DE IGP-DI ENTRE DATAS" )
     @RequestMapping(value = "BetweenDates", method = RequestMethod.GET)
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -58,7 +57,7 @@ public class IgpmController {
         Date ed = formato.parse(endDate);
         System.out.println(st);
         System.out.println(ed);
-        List<IGPM> lista =   igpmRepository.findByJoinedDateBetweenNative(st,ed);
+        List<IGPDI> lista =   igpdiRepository.findByJoinedDateBetweenNative(st,ed);
 
         // Abaixo é igual em todos o controllers
         double Valor3 = 0 ;
@@ -96,7 +95,7 @@ public class IgpmController {
     public HttpEntity alligpmJson() throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 
-        List<IGPM> lista =   igpmRepository.findAllByOrderByIdAsc();
+        List<IGPDI> lista =   igpdiRepository.findAllByOrderByIdAsc();
         return new HttpEntity<>(lista); // RETORNA OBJETO JSON PAGINADO
 
     }

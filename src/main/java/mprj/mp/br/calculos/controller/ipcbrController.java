@@ -1,8 +1,12 @@
 package mprj.mp.br.calculos.controller;
 
 
-import mprj.mp.br.calculos.domain.jpa.UFIR_RJ;
-import mprj.mp.br.calculos.repository.UfirRjRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import mprj.mp.br.calculos.domain.jpa.CDI;
+import mprj.mp.br.calculos.domain.jpa.IPCBR;
+import mprj.mp.br.calculos.repository.ipcbrRepository;
+import mprj.mp.br.calculos.repository.ipcbrRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,36 +22,28 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/UFIRRJ")
-public class UfirRjController {
+@RequestMapping("/IPC-BR")
+@Api(value = "Controller do IPC-BRRASIL" )
+public class ipcbrController {
 
     @Autowired
-    private UfirRjRepository ufirRjRepository;
+    private ipcbrRepository ipcbrRepository;
 
-    @GetMapping("/allUfirRj")
-    public List<UFIR_RJ> findAllByOrderByIdAsc(){
-        return ufirRjRepository.findAllByOrderByIdAsc();
+    @ApiOperation(value = "LISTA TODOS DADOS DE CDI DO DB" )
+    @GetMapping("/allIPCBR")
+    public List<IPCBR> findAllByOrderByIdAsc(){
+        return                ipcbrRepository.findAll();
     }
 
-    @GetMapping("/UfirRjfindDates")
-    public HttpEntity findDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        Date st = formato.parse(startDate);
-        Date ed = formato.parse(endDate);
-        List<UFIR_RJ> lista =   ufirRjRepository.findByJoinedDateBetweenNative(st,ed);
-        return new HttpEntity<>(lista); // RETORNA OBJETO JSON PAGINADO
-
-    }
+    @ApiOperation(value = "RETORNA JSON DE IPC-BR ENTRE DATAS" )
     @GetMapping(value = "BetweenDates")
     public HttpEntity BetweenDates(@RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date st = formato.parse(startDate);
         Date ed = formato.parse(endDate);
-        List<UFIR_RJ> lista =   ufirRjRepository.findByJoinedDateBetweenNative(st,ed);
+        List<IPCBR> lista =   ipcbrRepository.findByJoinedDateBetweenNative(st,ed);
 
-        // Abaixo é igual em todos o controllers
         double Valor3 = 0.0 ;
-        double valorJuros = 0.0;
         JSONArray jsonArray = new JSONArray();
         JSONObject obj1 = new JSONObject();
         for(int i = 0 ; i < lista.size(); i++){
@@ -57,24 +53,24 @@ public class UfirRjController {
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
+            String Val4 = String.format("%.7f", Valor3);
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            obj.put("acumulado", Valor3);
+            obj.put("acumulado", Val4);
             jsonArray.put(obj);
             System.out.println(obj);
         }
         System.out.println(jsonArray);
         obj1.put("content", jsonArray);
 
+
         return new HttpEntity<>(obj1.toString());
+
+
     }
-
-
-
-
 
 
 

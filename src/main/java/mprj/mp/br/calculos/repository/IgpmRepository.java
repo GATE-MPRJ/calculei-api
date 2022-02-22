@@ -43,12 +43,6 @@ public interface IgpmRepository extends CrudRepository<IGPM, Long> {
     @Query(value = "SELECT * from tbl_igpm e where e.valor > :valor", nativeQuery = true)
     List<IGPM> findByValorNative(@Param("valor") double valor);
 
-/*
-    @Query("select id from tbl_igpm e where e.data BETWEEN :startDate AND :endDate")
-    List<IGPM> findByStartDateBetween(@DateTimeFormat(pattern = "dd-mm-yyyy")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "dd-mm-yyyy")@Param("endDate")Date endDate);
-*/
-
-
     @Query(value = "SELECT * from tbl_igpm e where e.data =(select distinct (max(data)) from tbl_igpm)", nativeQuery = true)
     List<IGPM> findByLastUpdate();
 
