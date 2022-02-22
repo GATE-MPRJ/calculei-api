@@ -60,7 +60,7 @@ public class IndiceTjController {
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
-
+            //String Val4 = String.format("%.7f", Valor3);
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());

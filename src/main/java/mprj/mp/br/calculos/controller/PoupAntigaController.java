@@ -82,6 +82,7 @@ public class PoupAntigaController {
             //df.format(this.saldo);
             //decimalFormat.format (Valor3 / 100);
             //Float.parseFloat(decimalFormat.format(d))
+            String Val4 = String.format("%.7f", Valor3);
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());

@@ -60,24 +60,23 @@ public class inpcController {
         List<INPC> lista =   inpcRepository.findByJoinedDateBetweenNative(st,ed);
 
         // Abaixo é igual em todos o controllers
-        double Valor3 = 0 ;
-        float Valor4=  0;
-        double valorJuros = 0.0;
+        double Valor3 = 0.00 ;
         JSONArray jsonArray = new JSONArray();
         JSONObject obj1 = new JSONObject();
         for(int i = 0 ; i < lista.size(); i++){
             JSONObject obj = new JSONObject();
             if(i <= 0){
-                Valor3 = lista.get(i).getFator() * 1;
+                Valor3 = lista.get(i).getFator() * 1.00;
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
+            String Val4 = String.format("%.7f", Valor3);
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            obj.put("acumulado", Valor3);
+            obj.put("acumulado", Val4);
             jsonArray.put(obj);
             System.out.println(obj);
         }

@@ -76,12 +76,13 @@ public class SalarioController {
             } else {
                 Valor3 = Valor3 * lista.get(i).getFator();
             }
+            String Val4 = String.format("%.7f", Valor3);
             obj.put("id", lista.get(i).getId());
             obj.put("nome" ,lista.get(i).getNome());
             obj.put("data", lista.get(i).getData());
             obj.put("valor", lista.get(i).getValor());
             obj.put("fator", lista.get(i).getFator());
-            obj.put("acumulado", Valor3);
+            obj.put("acumulado", Val4);
             jsonArray.put(obj);
             System.out.println(obj);
         }
