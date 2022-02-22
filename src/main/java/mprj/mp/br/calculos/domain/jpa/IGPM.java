@@ -17,7 +17,7 @@ public class IGPM {
     private String Nome;
 
     @Column(name = "fator")
-    private float fator;
+    private double fator;
 
     @Column(name = "valor")
     private double valor;
@@ -36,7 +36,7 @@ public class IGPM {
     public void setValor(double valor){ this.valor = valor;}
     public Date getData() {return data;}
     public void  setData(Date data){ this.data = data;}
-    public float getFator(){return fator;}
+    public double getFator(){return fator;}
     public void setFator(float fator) { this.fator = fator;}
     public String getNome() { return Nome;}
     public void setNome(String Nome){this.Nome = Nome;}
