@@ -61,7 +61,7 @@ public class IgpmController {
         List<IGPM> lista =   igpmRepository.findByJoinedDateBetweenNative(st,ed);
 
         // Abaixo é igual em todos o controllers
-        float Valor3 = 0 ;
+        double Valor3 = 0 ;
         float Valor4=  0;
         double valorJuros = 0.0;
         JSONArray jsonArray = new JSONArray();
