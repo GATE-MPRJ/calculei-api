@@ -3,7 +3,9 @@ package mprj.mp.br.calculos.controller;
 
 import io.swagger.annotations.ApiOperation;
 import mprj.mp.br.calculos.domain.jpa.INDICE_TJ_FAZ;
+import mprj.mp.br.calculos.domain.jpa.IPCAE;
 import mprj.mp.br.calculos.repository.IndicesTjFazRepository;
+import mprj.mp.br.calculos.repository.ipcaeRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class IndiceTjFazController {
 
     @Autowired
     private IndicesTjFazRepository indicesTjFazRepository;
+
+    @Autowired
+    private ipcaeRepository ipcaeRepository;
 
     @GetMapping("/allIndiceTjFaz")
     public List<INDICE_TJ_FAZ> findAllByOrderByIdAsc(){
@@ -95,6 +100,68 @@ public class IndiceTjFazController {
 
     }
 
+    @PutMapping("/UpdateIpca")
+    public HttpEntity UpdateTJ() throws ParseException {
+        List<IPCAE> ipcae = ipcaeRepository.findByLastUpdate();
+        List<IPCAE> Allipcae = ipcaeRepository.findOrder();
+        //Iterable<INDICE_TJ_FAZ> ItUp =  indicesTjFazRepository.findOrder();
+        List<INDICE_TJ_FAZ> itj = indicesTjFazRepository.findOrder();
+        List<INDICE_TJ_FAZ> Lastitj = indicesTjFazRepository.findByLastUpdate();
 
+        INDICE_TJ_FAZ INDICE_TJ_FAZ = new INDICE_TJ_FAZ();
+        //INDICE_TJ_FAZ ITJFAZSAVE = indicesTjFazRepository.findOrderNl();
+        /*
+        infoNSO infoNSO = new infoNSO();
+        infoNSO infoNSOSave = infoNSORepository.findByID(id);
+         */
+
+
+
+        double iipcae = ipcae.get(0).getFator();
+        System.out.println(iipcae);
+        Date DTipcae = ipcae.get(0).getData();
+        System.out.println(DTipcae);
+        Date DTLastitj = Lastitj.get(0).getData();
+        System.out.println(DTLastitj);
+        if(DTLastitj.compareTo(DTipcae) > 0){
+            System.out.println("Date1 is after Date3");
+        }
+        if(DTipcae.compareTo(DTLastitj) > 0){
+            System.out.println("Date1 is after Date2");
+           int size = itj.size() + 1;
+            for (int i =0 ; i < size ; i++){
+                INDICE_TJ_FAZ ITJFAZSAVE = null;
+                double val = 0;
+                Date Dtitj = null;
+
+                if(i < itj.size()) {
+                    Long l= new Long(i);
+                    ITJFAZSAVE = indicesTjFazRepository.findID(itj.get(i).getId());
+                    itj.get(i).getFator();
+                    itj.get(i).getData();
+                    Dtitj = itj.get(i).getData();
+                    val = itj.get(i).getFator() * iipcae;
+                    ITJFAZSAVE.setFator(val);
+                    indicesTjFazRepository.save(ITJFAZSAVE);
+                }
+
+                if(i >= itj.size()){
+                    ITJFAZSAVE = new INDICE_TJ_FAZ();
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                    System.out.println(DTipcae);
+                    Date dt = ipcae.get(0).getData();
+                    ITJFAZSAVE.setData(dt);
+                    ITJFAZSAVE.setNome("LEI 11.960/2009");
+                    ITJFAZSAVE.setFator(ipcae.get(0).getFator());
+                    ITJFAZSAVE.setId(Lastitj.get(0).getId() + 1);
+                    indicesTjFazRepository.save(ITJFAZSAVE);
+                }
+                System.out.println(val);
+
+            }
+
+        }
+        return new HttpEntity<>(itj);
+    }
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_fator_correcao_faz_tjrj")
+@Table(name = "tbl_tj_l11960")
 public class INDICE_TJ_FAZ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,21 +17,14 @@ public class INDICE_TJ_FAZ {
 
     @Column(name = "fator")
     private double fator;
-    /*
-    @Column(name = "valor")
-    private double valor;
 
-    */
     @Column(name = "data")
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date data;
 
     public long getId(){return id;}
-    /*
-    public double getValor(){ return  valor;}
-    public void setValor(double valor){ this.valor = valor;}
+    public void setId(long id){this.id = id;}
 
-     */
     public Date getData() {return data;}
     public void  setData(Date data){ this.data = data;}
     public double getFator(){return fator;}

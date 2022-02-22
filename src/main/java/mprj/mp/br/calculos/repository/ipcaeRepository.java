@@ -33,6 +33,9 @@ public interface ipcaeRepository extends JpaRepository<IPCAE, Long> {
     @Query(value = "SELECT * from tbl_ipcae e where e.data =(select distinct (max(data)) from tbl_ipcae)", nativeQuery = true)
     List<IPCAE> findByLastUpdate();
 
+    @Query(value = "SELECT * from tbl_ipcae e order by e.data asc ", nativeQuery = true)
+    List<IPCAE> findOrder();
+
 
     List<IPCAE> findAllByOrderByIdAsc();
 

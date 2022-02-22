@@ -5,6 +5,7 @@ import mprj.mp.br.calculos.domain.jpa.INDICE_TJ_FAZ;
 import mprj.mp.br.calculos.domain.jpa.TR;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "INDICE_TJ_FAS", path = "indice_tj_faz")
 //@Repository
-public interface IndicesTjFazRepository extends JpaRepository<INDICE_TJ_FAZ, Long> {
+public interface IndicesTjFazRepository extends CrudRepository<INDICE_TJ_FAZ, Long> {
 
 
     @Query(value = "SELECT * from tbl_fator_correcao_tjrj e where e.data BETWEEN :startDate and :endDate", nativeQuery = true)
@@ -26,6 +27,16 @@ public interface IndicesTjFazRepository extends JpaRepository<INDICE_TJ_FAZ, Lon
 
     @Query(value = "SELECT * from tbl_fator_correcao_tjrj e where e.data =(select distinct (max(data)) from tbl_fator_correcao_tjrj)", nativeQuery = true)
     List<INDICE_TJ_FAZ> findByLastUpdate();
+
+    @Query(value = "SELECT * from tbl_fator_correcao_tjrj e order by e.data asc", nativeQuery = true)
+    List<INDICE_TJ_FAZ> findOrder();
+
+    @Query(value = "SELECT * from tbl_fator_correcao_tjrj e order by e.data asc", nativeQuery = true)
+    INDICE_TJ_FAZ findOrderNl();
+
+    @Query(value = "SELECT * from tbl_fator_correcao_tjrj e where e.id = :id order by e.data asc", nativeQuery = true)
+    INDICE_TJ_FAZ findID(@Param("id") long id);
+//List<PoupNova> findByValorNative(@Param("valor") double valor);
 
     List<INDICE_TJ_FAZ> findAllByOrderByIdAsc();
 

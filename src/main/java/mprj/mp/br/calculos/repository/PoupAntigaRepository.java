@@ -34,14 +34,10 @@ public interface PoupAntigaRepository extends JpaRepository<PoupAntiga, Long> {
     List<PoupAntiga> findByLastUpdate();
 
 
-    //@Query("select id from IGPM e where e.data BETWEEN :startDate AND :endDate")
-    //List<IGPM> findByStartDateBetween(@DateTimeFormat(pattern = "yyyy-mm-dd")@Param("startDate") Date startDate, @DateTimeFormat(pattern = "yyyy-mm-dd")@Param("endDate")Date endDate);
-
     List<PoupAntiga> findAllByOrderByIdAsc();
 
 
 
-    //findByStartDateBetween
 
 
 
